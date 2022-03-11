@@ -23,12 +23,18 @@ public class ProjectileShooter : MonoBehaviour
         "that aims the projectiles")]
     private LayerMask aimRayLayer;
     [SerializeField]
+    [Tooltip("Prefab to instantiate for the fireball")]
+    private Projectile projectilePrefab;
+    [SerializeField]
     [Tooltip("Reticle to fire projectiles from")]
     private Transform reticle;
     [SerializeField]
-    [Tooltip("Velocity of the fireball " +
+    [Tooltip("Base velocity of the fireball " +
         "when launched from the heart")]
-    private float launchVelocity = 20f;
+    private float baseLinearVelocity = 20;
+    [SerializeField]
+    [Tooltip("Spinning velocity of the fireball")]
+    private float baseAngularVelocity = 3;
     #endregion
 
     #region Monobehaviour Messages
@@ -51,8 +57,10 @@ public class ProjectileShooter : MonoBehaviour
             // If the ray hit nothing then aim at the farthest reach of the ray
             else aimPoint = screenRay.GetPoint(RaycastDistance);
 
-            Debug.DrawLine(aimPoint, screenRay.origin, Color.green, 0.5f);
-            Debug.DrawLine(aimPoint, transform.position, Color.red, 0.5f);
+            // Create a projectile and launch it towards the target point
+            Vector3 toTarget = aimPoint - transform.position;
+            Projectile projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            projectile.Launch(toTarget, baseLinearVelocity, baseAngularVelocity);
         }
     }
     #endregion
