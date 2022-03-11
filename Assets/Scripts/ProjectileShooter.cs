@@ -9,7 +9,7 @@ using UnityEngine;
 public class ProjectileShooter : MonoBehaviour
 {
     #region Private Properties
-    private Vector2 ScreenPoint => mainCamera.WorldToScreenPoint(reticle.position);
+    private Vector2 ReticleScreenPoint => mainCamera.WorldToScreenPoint(reticle.position);
     private float RaycastDistance => mainCamera.farClipPlane - mainCamera.nearClipPlane;
     #endregion
 
@@ -37,9 +37,8 @@ public class ProjectileShooter : MonoBehaviour
         // Check if the "Fire1" button is pressed
         if (Input.GetButtonDown("Fire1"))
         {   
-            Debug.Log($"Screen point: {ScreenPoint}", this);
-
-            Ray screenRay = mainCamera.ScreenPointToRay(ScreenPoint);
+            // Fire a ray out of the screen from the reticle
+            Ray screenRay = mainCamera.ScreenPointToRay(ReticleScreenPoint);
             bool hit = Physics.Raycast(
                 screenRay, 
                 out RaycastHit hitInfo,
