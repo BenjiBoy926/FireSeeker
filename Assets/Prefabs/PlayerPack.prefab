@@ -1139,7 +1139,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2410772082467986871, guid: 45b96e63f6f13e84ba1a6200bf72dabe, type: 3}
   reticle: {fileID: 1251515768738939859}
   baseLinearVelocity: 20
-  baseAngularVelocity: 3
+  baseAngularVelocity: 30
 --- !u!108 &7734845344361067812
 Light:
   m_ObjectHideFlags: 0

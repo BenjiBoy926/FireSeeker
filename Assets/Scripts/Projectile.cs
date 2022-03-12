@@ -13,6 +13,9 @@ public class Projectile : MonoBehaviour
     [Tooltip("Rigidbody of the projectile")]
     private Rigidbody body;
     [SerializeField]
+    [Tooltip("Explosion created when the projectile hits something")]
+    private ProjectileExplosion explosionPrefab;
+    [SerializeField]
     [Tooltip("Projectile will destroy itself after this amount of time")]
     private float maxLifetime = 3f;
     [SerializeField]
@@ -43,6 +46,8 @@ public class Projectile : MonoBehaviour
     public void Explode()
     {
         // Create an explosion at this point
+        ProjectileExplosion explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        explosion.Play();
 
         // Destroy the projectile
         Destroy(gameObject);
