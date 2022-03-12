@@ -47,7 +47,6 @@ public class Projectile : MonoBehaviour
     {
         // Create an explosion at this point
         ProjectileExplosion explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        explosion.Play();
 
         // Destroy the projectile
         Destroy(gameObject);
