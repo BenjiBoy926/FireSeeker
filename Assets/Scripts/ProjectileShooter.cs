@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Used by the protagonist to launch fireballs that 
@@ -35,6 +36,10 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField]
     [Tooltip("Spinning velocity of the fireball")]
     private float baseAngularVelocity = 3;
+    [field: SerializeField]
+    [field: Tooltip("Event invoked when a projectile shot from this shooter " +
+        "hits a projectile receiver")]
+    public UnityEvent<ProjectileReceiver> ProjectileReceivedEvent { get; private set; }
     #endregion
 
     #region Monobehaviour Messages
@@ -61,6 +66,7 @@ public class ProjectileShooter : MonoBehaviour
             Vector3 toTarget = aimPoint - transform.position;
             Projectile projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
             projectile.Launch(toTarget, baseLinearVelocity, baseAngularVelocity);
+            projectile.owner = this;
         }
     }
     #endregion

@@ -59,9 +59,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.45616764, g: 0.4692028, b: 0.6320754, a: 1}
-  m_Intensity: 0.99622387
-  m_Range: 4.996224
+  m_Color: {r: 0.1938412, g: 0.20000063, b: 0.33962262, a: 1}
+  m_Intensity: 0.99011296
+  m_Range: 2.990113
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -122,21 +122,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e550bce952ac9c4ca8b84d45fbdc10b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  light: {fileID: 8494756242436944584}
-  gradient:
+  <Light>k__BackingField: {fileID: 8494756242436944584}
+  <Gradient>k__BackingField:
     serializedVersion: 2
-    key0: {r: 0.45616764, g: 0.4692028, b: 0.6320754, a: 1}
-    key1: {r: 0.997863, g: 1, b: 0.75, a: 1}
-    key2: {r: 1, g: 1, b: 0, a: 0}
-    key3: {r: 1, g: 0.2844212, b: 0, a: 0}
+    key0: {r: 0.1938412, g: 0.20000063, b: 0.33962262, a: 1}
+    key1: {r: 1, g: 0.94259137, b: 0, a: 1}
+    key2: {r: 1, g: 0.26194993, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 16675
-    ctime2: 32768
-    ctime3: 65535
+    ctime1: 20432
+    ctime2: 65535
+    ctime3: 0
     ctime4: 0
     ctime5: 0
     ctime6: 0
@@ -150,20 +150,20 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 4
+    m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  start:
-    <Range>k__BackingField: 5
+  <StartConfig>k__BackingField:
+    <Range>k__BackingField: 3
     <Intensity>k__BackingField: 1
-  end:
-    <Range>k__BackingField: 6
-    <Intensity>k__BackingField: 2
-  animationCurve:
+  <EndConfig>k__BackingField:
+    <Range>k__BackingField: 5
+    <Intensity>k__BackingField: 3
+  <AnimationCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.004166667
-      value: -0.0041841003
+      time: -0.008333334
+      value: -0.008368201
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -171,8 +171,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.4996394
-      value: 1.9951315
+      time: 0.2902901
+      value: 1.4853314
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -180,22 +180,33 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.9875
-      value: 1.0083683
-      inSlope: -4.5314054
-      outSlope: -4.5314054
+      time: 0.6837215
+      value: 1.2264876
+      inSlope: 0.022822553
+      outSlope: 0.022822553
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.14848937
+      inWeight: 0.7586207
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9957532
+      value: 0.98807883
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  duration: 1
-  playOnAwake: 0
-  destroyOnFinish: 0
-  reverse: 0
-  interpolator: 0
+  <Duration>k__BackingField: 1
+  <PlayOnAwake>k__BackingField: 0
+  <Reverse>k__BackingField: 0
+  <Interpolator>k__BackingField: 0
+  <TransitionCompleteEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8494756242436944587
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,9 @@ using UnityEngine;
 public class ProjectileExplosion : MonoBehaviour
 {
     #region Private Editor Fields
+    [field: SerializeField]
+    [field: Tooltip("Transition used to create a fun effect for the explosion")]
+    public LightTransition Transition { get; private set; }
     [SerializeField]
     [Tooltip("Physics layers that the explosion can hit")]
     private LayerMask explosionMask;
@@ -13,8 +16,8 @@ public class ProjectileExplosion : MonoBehaviour
     private float explosionRange = 10f;
     #endregion
 
-    #region Monobehaviour Messages
-    private void Start()
+    #region Public Methods
+    public void Explode(ProjectileShooter owner, Projectile projectile)
     {
         // Overlap all colliders in the range
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange, explosionMask, QueryTriggerInteraction.Collide);
@@ -26,9 +29,25 @@ public class ProjectileExplosion : MonoBehaviour
             // Notify all receivers that a projectile hit them
             if (receiver)
             {
-                receiver.ProjectileHitEvent.Invoke();
+                receiver.ProjectileHitEvent.Invoke(projectile);
+                owner.ProjectileReceivedEvent.Invoke(receiver);
             }
         }
+    }
+    #endregion
+
+    #region Monobehaviour Messages
+    private void Start()
+    {
+        // Destroy self when the transition is finished
+        Transition.TransitionCompleteEvent.AddListener(DestroySelf);
+    }
+    #endregion
+
+    #region Private Methods
+    private void DestroySelf()
+    {
+        Destroy(gameObject);
     }
     #endregion
 }

@@ -19,20 +19,26 @@ public class Torch : MonoBehaviour
     #region Public Methods
     public void LightUp()
     {
-        lit = true;
-        transition.Play();
+        if (!lit)
+        {
+            lit = true;
+            transition.Play();
+        }
     }
     public void SnuffOut()
     {
-        lit = false;
-        transition.PlayReversed();
+        if (lit)
+        {
+            lit = false;
+            transition.PlayReversed();
+        }
     }
     #endregion
 
     #region Monobehaviour Messages
     private void Start()
     {
-        projectileReceiver.ProjectileHitEvent.AddListener(LightUp);
+        projectileReceiver.ProjectileHitEvent.AddListener(OnProjectileReceived);
     }
     private void OnValidate()
     {
@@ -42,6 +48,13 @@ public class Torch : MonoBehaviour
             else transition.Play();
             transition.OnValidate();
         }
+    }
+    #endregion
+
+    #region Private Methods
+    private void OnProjectileReceived(Projectile projectile)
+    {
+        LightUp();
     }
     #endregion
 }

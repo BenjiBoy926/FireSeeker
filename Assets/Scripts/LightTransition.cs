@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LightTransition : MonoBehaviour
 {
@@ -9,55 +10,61 @@ public class LightTransition : MonoBehaviour
     #endregion
 
     #region Private Editor Fields
-    [SerializeField]
-    [Tooltip("Light to configure during the transition")]
-    private new Light light;
-    [SerializeField]
-    [Tooltip("Color gradient used for the transition")]
-    private Gradient gradient;
-    [SerializeField]
-    [Tooltip("Starting light configuration")]
-    private LightConfig start;
-    [SerializeField]
-    [Tooltip("Ending light configuration")]
-    private LightConfig end;
-    [SerializeField]
-    [Tooltip("Curve used to interpolate between the light configurations")]
-    private AnimationCurve animationCurve;
-    [SerializeField]
-    [Tooltip("Duration of the transition")]
-    private float duration = 1f;
-    [SerializeField]
-    [Tooltip("Play the effect when it wakes up")]
-    private bool playOnAwake = true;
-    [SerializeField]
-    [Tooltip("If true, the transition destroys itself once it is finished playing")]
-    private bool destroyOnFinish = false;
-    [SerializeField]
-    [Tooltip("Play the effect in reverse, going from end to start")]
-    private bool reverse = false;
+    [field: SerializeField]
+    [field: Tooltip("Light to configure during the transition")]
+    public Light Light { get; private set; }
+    [field: SerializeField]
+    [field: Tooltip("Color gradient used for the transition")]
+    public Gradient Gradient { get; private set; }
+    [field: SerializeField]
+    [field: Tooltip("Starting light configuration")]
+    public LightConfig StartConfig { get; private set; }
+    [field: SerializeField]
+    [field: Tooltip("Ending light configuration")]
+    public LightConfig EndConfig { get; private set; }
+    [field: SerializeField]
+    [field: Tooltip("Curve used to interpolate between the light configurations")]
+    public AnimationCurve AnimationCurve { get; private set; }
+    [field: SerializeField]
+    [field: Tooltip("Duration of the transition")]
+    public float Duration { get; private set; } = 1f;
+    [field: SerializeField]
+    [field: Tooltip("Play the effect when it wakes up")]
+    public bool PlayOnAwake { get; private set; } = true;
+    [field: SerializeField]
+    [field: Tooltip("Play the effect in reverse, going from end to start")]
+    public bool Reverse { get; private set; } = false;
 
-    [Space]
+    [field: Space]
 
-    [SerializeField]
-    [Tooltip("Interpolator used to animate the transition")]
-    [Range(0f, 1f)]
-    private float interpolator = 0f;
+    [field: SerializeField]
+    [field: Tooltip("Interpolator used to animate the transition")]
+    [field: Range(0f, 1f)]
+    public float Interpolator { get; private set; } = 0f;
+
+    [field: Space]
+
+    [field: SerializeField]
+    [field: Tooltip("Event invoked when the transition finishes")]
+    public UnityEvent TransitionCompleteEvent { get; private set; }
     #endregion
 
     #region Private Fields
     private float timeOfEffectStart = float.MinValue;
+    private bool transitionCompleteEventInvoked = false;
     #endregion
 
     #region Public Methods
     public void Play()
     {
-        reverse = false;
+        transitionCompleteEventInvoked = false;
+        Reverse = false;
         timeOfEffectStart = Time.time;
     }
     public void PlayReversed()
     {
-        reverse = true;
+        transitionCompleteEventInvoked = false;
+        Reverse = true;
         timeOfEffectStart = Time.time;
     }
     #endregion
@@ -65,9 +72,9 @@ public class LightTransition : MonoBehaviour
     #region Monobehaviour Messages
     private void Start()
     {
-        if (playOnAwake)
+        if (PlayOnAwake)
         {
-            if (reverse) PlayReversed();
+            if (Reverse) PlayReversed();
             else Play();
         }
         // If we should not play on awake then make the start time the min number
@@ -76,18 +83,22 @@ public class LightTransition : MonoBehaviour
     private void Update()
     {
         // Check if we are still playing the effect
-        if (TimeSinceEffectStart <= duration)
+        if (TimeSinceEffectStart <= Duration)
         {
-            interpolator = TimeSinceEffectStart / duration;
+            Interpolator = TimeSinceEffectStart / Duration;
             Animate();
         }
-        // If the animation is finished and we should destroy ourselves,
-        // then destroy ourselves
-        else if (destroyOnFinish) Destroy(gameObject);
+        // If the transition complete event has not been invoked yet,
+        // then invoke the event
+        else if (!transitionCompleteEventInvoked)
+        {
+            transitionCompleteEventInvoked = true;
+            TransitionCompleteEvent.Invoke();
+        }
     }
     public void OnValidate()
     {
-        if (light)
+        if (Light)
         {
             Animate();
         }
@@ -98,28 +109,30 @@ public class LightTransition : MonoBehaviour
     private void Animate()
     {
         // Evaluate the animation curve used to lerp between light configs
-        float t = animationCurve.Evaluate(interpolator);
+        float t = AnimationCurve.Evaluate(Interpolator);
+
+        // Color and config to set for the light
         Color color;
         LightConfig config;
 
         // If animation is reversed then lerp from end to start
-        if (reverse)
+        if (Reverse)
         {
-            color = gradient.Evaluate(1 - interpolator);
-            config = LightConfig.LerpUnclamped(end, start, t);
+            color = Gradient.Evaluate(1 - Interpolator);
+            config = LightConfig.LerpUnclamped(EndConfig, StartConfig, t);
         }
         // If the animation is normal then lerp from start to end
         else
         {
-            color = gradient.Evaluate(interpolator);
-            config = LightConfig.LerpUnclamped(start, end, t);
+            color = Gradient.Evaluate(Interpolator);
+            config = LightConfig.LerpUnclamped(StartConfig, EndConfig, t);
         }
 
         // Set the light color to the correct gradient color
-        light.color = color;
+        Light.color = color;
 
         // Apply the config to the light
-        config.Apply(light);
+        config.Apply(Light);
     }
     #endregion
 

@@ -8,6 +8,10 @@ public class Projectile : MonoBehaviour
     private float Age => Time.time - timeOfCreation;
     #endregion
 
+    #region Public Fields
+    public ProjectileShooter owner;
+    #endregion
+
     #region Private Editor Fields
     [SerializeField]
     [Tooltip("Rigidbody of the projectile")]
@@ -47,6 +51,7 @@ public class Projectile : MonoBehaviour
     {
         // Create an explosion at this point
         ProjectileExplosion explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        explosion.Explode(owner, this);
 
         // Destroy the projectile
         Destroy(gameObject);
