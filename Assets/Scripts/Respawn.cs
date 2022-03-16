@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class Respawn : MonoBehaviour
@@ -14,7 +15,10 @@ public class Respawn : MonoBehaviour
     private Transform body;
     [SerializeField]
     [Tooltip("Object that activates to create a respawn effect")]
-    private Transform decoy;
+    private Rigidbody decoy;
+    [SerializeField]
+    [Tooltip("Speed of the decoy when it spins")]
+    private float decoySpinSpeed = 30f;
     [SerializeField]
     [Tooltip("If the player falls below this level, then a respawn is triggered")]
     private float killDepth = -25;
@@ -31,31 +35,21 @@ public class Respawn : MonoBehaviour
 
     #region Private Fields
     private Coroutine respawnRoutine;
+    private TrailRenderer[] decoyTrails;
     #endregion
 
     #region Monobehaviour Messages
     private void Start()
     {
         decoy.gameObject.SetActive(false);
+        decoyTrails = decoy.GetComponentsInChildren<TrailRenderer>(true);
     }
     private void Update()
     {
-        if (body.position.y < killDepth)
+        if (body.position.y < killDepth && respawnRoutine == null)
         {
-            // If there is a current point and no respawn routine,
-            // then start the respawn
-            if (currentPoint)
-            {
-                if (respawnRoutine == null)
-                {
-                    respawnRoutine = StartCoroutine(RespawnRoutine());
-                }
-            }
-            // If there is not respawn point then we restart the scene
-            else
-            {
-
-            }
+            if (currentPoint) respawnRoutine = StartCoroutine(RespawnRoutine());
+            else respawnRoutine = StartCoroutine(RestartRoutine());
         }
     }
     #endregion
@@ -66,12 +60,25 @@ public class Respawn : MonoBehaviour
         // Disable the body and enable the decoy
         body.gameObject.SetActive(false);
         decoy.gameObject.SetActive(true);
+
+        // Reset the decoy
+        SetDecoyTrailsEnabled(false);
+        decoy.angularVelocity = Vector3.zero;
         decoy.position = body.position;
 
         // Wait after the decoy reveal
         yield return new WaitForSeconds(decoyRevealTime);
 
+        // Point the decoy at the current point
+        Vector3 toPoint = currentPoint.transform.position - decoy.position;
+        toPoint = toPoint.normalized;
+
+        // Make the decoy spin around
+        decoy.transform.forward = toPoint;
+        decoy.angularVelocity = toPoint * decoySpinSpeed;
+
         // Ease the decoy and body towards the respawn point
+        SetDecoyTrailsEnabled(true);
         decoy.DOMove(currentPoint.transform.position, moveTime).SetEase(animationEase);
 
         // Wait for the body to get to the respawn point
@@ -86,6 +93,21 @@ public class Respawn : MonoBehaviour
 
         // Remove the respawn routine
         respawnRoutine = null;
+    }
+    private IEnumerator RestartRoutine()
+    {
+        // Wait for the panel to fade in
+        yield return FadingPanel.FadeIn().WaitForCompletion();
+
+        // Reload this scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    private void SetDecoyTrailsEnabled(bool enabled)
+    {
+        foreach (TrailRenderer trail in decoyTrails)
+        {
+            trail.enabled = enabled;
+        }
     }
     #endregion
 }
