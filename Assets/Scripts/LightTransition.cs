@@ -72,13 +72,17 @@ public class LightTransition : MonoBehaviour
     #region Monobehaviour Messages
     private void Start()
     {
+        // If we should not play on awake then make the start time the min number
+        if (!PlayOnAwake) timeOfEffectStart = float.MinValue;
+    }
+    private void OnEnable()
+    {
+        // If we should play on awake then play the transition
         if (PlayOnAwake)
         {
             if (Reverse) PlayReversed();
             else Play();
         }
-        // If we should not play on awake then make the start time the min number
-        else timeOfEffectStart = float.MinValue;
     }
     private void Update()
     {

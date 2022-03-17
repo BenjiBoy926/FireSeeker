@@ -23,12 +23,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2898057956329004580}
-  - component: {fileID: 8795851472600016644}
   - component: {fileID: 1013914866592232724}
+  - component: {fileID: 5573566879906427324}
+  - component: {fileID: 2838904643491634194}
   - component: {fileID: 1594519267869439418}
   - component: {fileID: 3689683836080972284}
-  - component: {fileID: 5894160783462424513}
-  - component: {fileID: 2838904643491634194}
   m_Layer: 0
   m_Name: RespawnLantern
   m_TagString: Untagged
@@ -51,19 +50,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8795851472600016644
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2898057956329004583}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!108 &1013914866592232724
 Light:
   m_ObjectHideFlags: 0
@@ -126,6 +112,33 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!65 &5573566879906427324
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2898057956329004583}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.8, y: 5.3, z: 3.8}
+  m_Center: {x: 0, y: -0.8, z: 0}
+--- !u!114 &2838904643491634194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2898057956329004583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e076d3c4177d64fbc205031012da52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Torch>k__BackingField: {fileID: 1594519267869439418}
+  <Order>k__BackingField: 0
 --- !u!114 &1594519267869439418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,9 +151,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdfd9438037f47488d3b724c7970b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileReceiver: {fileID: 5894160783462424513}
-  transition: {fileID: 3689683836080972284}
-  lit: 0
+  <Transition>k__BackingField: {fileID: 3689683836080972284}
+  <Lit>k__BackingField: 0
+  <LightUpEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <SnuffOutEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3689683836080972284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,33 +256,6 @@ MonoBehaviour:
   <TransitionCompleteEvent>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5894160783462424513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2898057956329004583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 461cbe9296ae6484385704966503f43a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <ProjectileHitEvent>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2838904643491634194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2898057956329004583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89e076d3c4177d64fbc205031012da52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2898057956807586930
 PrefabInstance:
   m_ObjectHideFlags: 0

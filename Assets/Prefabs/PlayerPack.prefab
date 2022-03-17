@@ -521,7 +521,7 @@ MonoBehaviour:
   decoy: {fileID: 394062116503072833}
   decoySpinSpeed: 30
   killDepth: -25
-  decoyRevealTime: 1
+  decoyRevealTime: 0.3
   moveTime: 2
   animationEase: 15
 --- !u!1 &1664210005862835351
@@ -936,6 +936,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6836401523598022040}
   - component: {fileID: 8965020973495720898}
+  - component: {fileID: 6729477828194798204}
   m_Layer: 0
   m_Name: DarkerLight
   m_TagString: Untagged
@@ -968,9 +969,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.18545534, b: 0, a: 1}
-  m_Intensity: 3
-  m_Range: 1
+  m_Color: {r: 1, g: 0.23529412, b: 0, a: 1}
+  m_Intensity: 3.005571
+  m_Range: 1.001857
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1019,6 +1020,94 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &6729477828194798204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3506606927665426411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e550bce952ac9c4ca8b84d45fbdc10b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Light>k__BackingField: {fileID: 8965020973495720898}
+  <Gradient>k__BackingField:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.23529412, b: 0, a: 1}
+    key1: {r: 1, g: 0.21176471, b: 0, a: 1}
+    key2: {r: 1, g: 1, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  <StartConfig>k__BackingField:
+    <Range>k__BackingField: 1
+    <Intensity>k__BackingField: 3
+  <EndConfig>k__BackingField:
+    <Range>k__BackingField: 10
+    <Intensity>k__BackingField: 30
+  <AnimationCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.004166667
+      value: -0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1.0125523
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0041667
+      value: 0.0041841003
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <Duration>k__BackingField: 0.3
+  <PlayOnAwake>k__BackingField: 1
+  <Reverse>k__BackingField: 0
+  <Interpolator>k__BackingField: 0
+  <TransitionCompleteEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3761044962651638038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2337,6 +2426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8592464425980399124}
   - component: {fileID: 8995637196925105016}
+  - component: {fileID: 3607440437442839657}
   m_Layer: 0
   m_Name: BrighterLight
   m_TagString: Untagged
@@ -2370,8 +2460,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 0, a: 1}
-  m_Intensity: 3
-  m_Range: 1
+  m_Intensity: 3.005571
+  m_Range: 1.001857
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -2420,6 +2510,94 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &3607440437442839657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9015021248342799159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e550bce952ac9c4ca8b84d45fbdc10b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Light>k__BackingField: {fileID: 8995637196925105016}
+  <Gradient>k__BackingField:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 0, a: 1}
+    key1: {r: 1, g: 1, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  <StartConfig>k__BackingField:
+    <Range>k__BackingField: 1
+    <Intensity>k__BackingField: 3
+  <EndConfig>k__BackingField:
+    <Range>k__BackingField: 10
+    <Intensity>k__BackingField: 30
+  <AnimationCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.004166667
+      value: -0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1.0125523
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0041667
+      value: 0.0041841003
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <Duration>k__BackingField: 0.3
+  <PlayOnAwake>k__BackingField: 1
+  <Reverse>k__BackingField: 0
+  <Interpolator>k__BackingField: 0
+  <TransitionCompleteEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9053164329332036921
 GameObject:
   m_ObjectHideFlags: 0

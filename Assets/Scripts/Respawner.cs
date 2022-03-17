@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
-public class Respawn : MonoBehaviour
+public class Respawner : MonoBehaviour
 {
     #region Private Editor Fields
     [SerializeField]
@@ -38,6 +38,18 @@ public class Respawn : MonoBehaviour
     private TrailRenderer[] decoyTrails;
     #endregion
 
+    #region Public Methods
+    public void SetPoint(RespawnPoint respawnPoint)
+    {
+        // Only set the current point if we don't have a current point yet
+        // or the point comes after the current point
+        if (currentPoint == null || currentPoint.Order < respawnPoint.Order)
+        {
+            currentPoint = respawnPoint;
+        }
+    }
+    #endregion
+
     #region Monobehaviour Messages
     private void Start()
     {
@@ -65,20 +77,14 @@ public class Respawn : MonoBehaviour
         SetDecoyTrailsEnabled(false);
         decoy.angularVelocity = Vector3.zero;
         decoy.position = body.position;
+        decoy.transform.forward = currentPoint.transform.position - decoy.position;
 
         // Wait after the decoy reveal
         yield return new WaitForSeconds(decoyRevealTime);
 
-        // Point the decoy at the current point
-        Vector3 toPoint = currentPoint.transform.position - decoy.position;
-        toPoint = toPoint.normalized;
-
-        // Make the decoy spin around
-        decoy.transform.forward = toPoint;
-        decoy.angularVelocity = toPoint * decoySpinSpeed;
-
         // Ease the decoy and body towards the respawn point
         SetDecoyTrailsEnabled(true);
+        decoy.angularVelocity = decoy.transform.forward * decoySpinSpeed;
         decoy.DOMove(currentPoint.transform.position, moveTime).SetEase(animationEase);
 
         // Wait for the body to get to the respawn point
