@@ -40,13 +40,21 @@ public class Drawbridge : MonoBehaviour
     #region Public Methods
     public void Lower()
     {
-        transform.DOKill();
-        transform.DORotate(LoweredOrientation, MoveTime).SetEase(LowerAnimationEase);
+        if (!Lowered)
+        {
+            transform.DOKill();
+            transform.DORotate(LoweredOrientation, MoveTime).SetEase(LowerAnimationEase);
+            Lowered = true;
+        }
     }
     public void Raise()
     {
-        transform.DOKill();
-        transform.DORotate(RaisedOrientation, MoveTime).SetEase(RaiseAnimationEase);
+        if (Lowered)
+        {
+            transform.DOKill();
+            transform.DORotate(RaisedOrientation, MoveTime).SetEase(RaiseAnimationEase);
+            Lowered = false;
+        }
     }
     #endregion
 }

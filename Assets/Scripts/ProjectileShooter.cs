@@ -42,7 +42,15 @@ public class ProjectileShooter : MonoBehaviour
     public UnityEvent<ProjectileReceiver> ProjectileReceivedEvent { get; private set; }
     #endregion
 
+    #region Private Fields
+    private LightTransition[] transitions;
+    #endregion
+
     #region Monobehaviour Messages
+    private void Start()
+    {
+        transitions = GetComponentsInChildren<LightTransition>(true);
+    }
     private void Update()
     {
         // Check if the "Fire1" button is pressed
@@ -67,6 +75,19 @@ public class ProjectileShooter : MonoBehaviour
             Projectile projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
             projectile.Launch(toTarget, baseLinearVelocity, baseAngularVelocity);
             projectile.owner = this;
+
+            // Play all light transitions
+            PlayTransitions();
+        }
+    }
+    #endregion
+
+    #region Private Methods
+    private void PlayTransitions()
+    {
+        foreach (LightTransition transition in transitions)
+        {
+            transition.Play();
         }
     }
     #endregion

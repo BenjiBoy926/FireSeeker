@@ -774,7 +774,7 @@ MonoBehaviour:
   m_JumpPower: 10
   m_GravityMultiplier: 2
   m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 1
+  m_MoveSpeedMultiplier: 2
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 1
 --- !u!114 &2006670290370430155
@@ -1104,6 +1104,7 @@ MonoBehaviour:
   <Duration>k__BackingField: 0.3
   <PlayOnAwake>k__BackingField: 1
   <Reverse>k__BackingField: 0
+  <Loop>k__BackingField: 0
   <Interpolator>k__BackingField: 0
   <TransitionCompleteEvent>k__BackingField:
     m_PersistentCalls:
@@ -1230,6 +1231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2951134960227492288}
   - component: {fileID: 5729238444914075283}
+  - component: {fileID: 7099111841256859406}
   m_Layer: 6
   m_Name: Backlight
   m_TagString: Untagged
@@ -1262,9 +1264,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.5790032, b: 0.19245279, a: 1}
-  m_Intensity: 1
-  m_Range: 5
+  m_Color: {r: 1, g: 0.5372549, b: 0, a: 1}
+  m_Intensity: 3.12065
+  m_Range: 3.0109682
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1313,6 +1315,95 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 1
   m_ShadowAngle: 0
+--- !u!114 &7099111841256859406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3912234098122958906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e550bce952ac9c4ca8b84d45fbdc10b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Light>k__BackingField: {fileID: 5729238444914075283}
+  <Gradient>k__BackingField:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.5372549, b: 0, a: 1}
+    key1: {r: 1, g: 1, b: 0, a: 1}
+    key2: {r: 1, g: 1, b: 1, a: 0}
+    key3: {r: 1, g: 1, b: 0, a: 0}
+    key4: {r: 1, g: 0.5254902, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 16384
+    ctime2: 32768
+    ctime3: 49151
+    ctime4: 65535
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 5
+    m_NumAlphaKeys: 2
+  <StartConfig>k__BackingField:
+    <Range>k__BackingField: 3
+    <Intensity>k__BackingField: 3
+  <EndConfig>k__BackingField:
+    <Range>k__BackingField: 5
+    <Intensity>k__BackingField: 25
+  <AnimationCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0034741077
+      value: 0.0054840934
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5022047
+      value: 0.98984927
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0009353
+      value: 0.009801485
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <Duration>k__BackingField: 0.2
+  <PlayOnAwake>k__BackingField: 0
+  <Reverse>k__BackingField: 0
+  <Loop>k__BackingField: 0
+  <Interpolator>k__BackingField: 0
+  <TransitionCompleteEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3996171494077330787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,6 +1892,7 @@ GameObject:
   - component: {fileID: 4747954366836511011}
   - component: {fileID: 2460294126367603268}
   - component: {fileID: 7734845344361067812}
+  - component: {fileID: 4647219468892366200}
   m_Layer: 6
   m_Name: ProjectileLauncher
   m_TagString: Untagged
@@ -1858,9 +1950,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.5790032, b: 0.19245279, a: 1}
-  m_Intensity: 3
-  m_Range: 3
+  m_Color: {r: 1, g: 0.5372549, b: 0, a: 1}
+  m_Intensity: 3.12065
+  m_Range: 3.0109682
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1871,7 +1963,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.03
+    m_NearPlane: 0.0312065
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -1909,6 +2001,95 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 1
   m_ShadowAngle: 0
+--- !u!114 &4647219468892366200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6044749755728464938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e550bce952ac9c4ca8b84d45fbdc10b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Light>k__BackingField: {fileID: 7734845344361067812}
+  <Gradient>k__BackingField:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.5372549, b: 0, a: 1}
+    key1: {r: 1, g: 1, b: 0, a: 1}
+    key2: {r: 1, g: 1, b: 1, a: 0}
+    key3: {r: 1, g: 1, b: 0, a: 0}
+    key4: {r: 1, g: 0.5254902, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 16384
+    ctime2: 32768
+    ctime3: 49151
+    ctime4: 65535
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 5
+    m_NumAlphaKeys: 2
+  <StartConfig>k__BackingField:
+    <Range>k__BackingField: 3
+    <Intensity>k__BackingField: 3
+  <EndConfig>k__BackingField:
+    <Range>k__BackingField: 5
+    <Intensity>k__BackingField: 25
+  <AnimationCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0034741077
+      value: 0.0054840934
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5022047
+      value: 0.98984927
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0009353
+      value: 0.009801485
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <Duration>k__BackingField: 0.2
+  <PlayOnAwake>k__BackingField: 0
+  <Reverse>k__BackingField: 0
+  <Loop>k__BackingField: 0
+  <Interpolator>k__BackingField: 0
+  <TransitionCompleteEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6346626994683369292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,6 +2775,7 @@ MonoBehaviour:
   <Duration>k__BackingField: 0.3
   <PlayOnAwake>k__BackingField: 1
   <Reverse>k__BackingField: 0
+  <Loop>k__BackingField: 0
   <Interpolator>k__BackingField: 0
   <TransitionCompleteEvent>k__BackingField:
     m_PersistentCalls:

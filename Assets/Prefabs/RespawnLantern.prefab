@@ -252,6 +252,7 @@ MonoBehaviour:
   <Duration>k__BackingField: 5
   <PlayOnAwake>k__BackingField: 0
   <Reverse>k__BackingField: 0
+  <Loop>k__BackingField: 0
   <Interpolator>k__BackingField: 0
   <TransitionCompleteEvent>k__BackingField:
     m_PersistentCalls:

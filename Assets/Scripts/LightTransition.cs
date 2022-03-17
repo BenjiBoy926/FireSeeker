@@ -34,6 +34,9 @@ public class LightTransition : MonoBehaviour
     [field: SerializeField]
     [field: Tooltip("Play the effect in reverse, going from end to start")]
     public bool Reverse { get; private set; } = false;
+    [field: SerializeField]
+    [field: Tooltip("Repeat the effect from the beginning")]
+    public bool Loop { get; private set; } = false;
 
     [field: Space]
 
@@ -98,6 +101,13 @@ public class LightTransition : MonoBehaviour
         {
             transitionCompleteEventInvoked = true;
             TransitionCompleteEvent.Invoke();
+
+            // If we should loop then play the transition again
+            if (Loop)
+            {
+                if (Reverse) PlayReversed();
+                else Play();
+            }
         }
     }
     public void OnValidate()
