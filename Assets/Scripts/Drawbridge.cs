@@ -27,6 +27,12 @@ public class Drawbridge : MonoBehaviour
     [field: SerializeField]
     [field: Tooltip("Ease to use for the drawbridge rasing")]
     public Ease RaiseAnimationEase { get; private set; } = Ease.InCubic;
+    [field: SerializeField]
+    [field: Tooltip("Audio clip that plays when the drawbridge is lowered")]
+    public AudioClip PositionChangeClip { get; private set; }
+    [field: SerializeField]
+    [field: Tooltip("Audio source that plays the audio for the bridge")]
+    public AudioSource AudioSource { get; private set; }
     #endregion
 
     #region Monobehaviour Messages
@@ -45,6 +51,10 @@ public class Drawbridge : MonoBehaviour
             transform.DOKill();
             transform.DORotate(LoweredOrientation, MoveTime).SetEase(LowerAnimationEase);
             Lowered = true;
+
+            // Play the position change sound
+            AudioSource.clip = PositionChangeClip;
+            AudioSource.Play();
         }
     }
     public void Raise()
@@ -54,6 +64,10 @@ public class Drawbridge : MonoBehaviour
             transform.DOKill();
             transform.DORotate(RaisedOrientation, MoveTime).SetEase(RaiseAnimationEase);
             Lowered = false;
+
+            // Play the position change sound
+            AudioSource.clip = PositionChangeClip;
+            AudioSource.Play();
         }
     }
     #endregion

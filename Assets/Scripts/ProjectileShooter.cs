@@ -36,6 +36,13 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField]
     [Tooltip("Spinning velocity of the fireball")]
     private float baseAngularVelocity = 3;
+
+    [SerializeField]
+    [Tooltip("Audio source to play from when a projectile is launched")]
+    private AudioSource audioSource;
+
+    [field: Space]
+
     [field: SerializeField]
     [field: Tooltip("Event invoked when a projectile shot from this shooter " +
         "hits a projectile receiver")]
@@ -78,6 +85,9 @@ public class ProjectileShooter : MonoBehaviour
 
             // Play all light transitions
             PlayTransitions();
+
+            // Play the audio source
+            audioSource.Play();
         }
     }
     #endregion
