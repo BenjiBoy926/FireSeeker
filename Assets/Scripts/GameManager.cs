@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 {
     #region Public Properties
     [field: SerializeField]
+    [field: Tooltip("Reference to the script that managers audio")]
+    public AudioManager Audio { get; private set; }
+    [field: SerializeField]
     [field: Tooltip("Reference to the first respawn point that the player should look at")]
     public RespawnPoint FirstRespawnPoint { get; private set; }
     [field: SerializeField]
@@ -68,6 +71,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(FinalRespawnPoint.Torch.Transition.Duration);
 
         // Have the audio manager switch tracks here
+        Audio.MusicSource.DOFade(0f, FadeTime);
 
         // Wait for the panel to fade in
         yield return FadingPanel.FadeIn(FadeTime).WaitForCompletion();
@@ -77,6 +81,11 @@ public class GameManager : MonoBehaviour
         RenderSettings.ambientMode = AmbientMode.Skybox;
         Sun.enabled = true;
         playerManager.ReverbFilter.enabled = false;
+
+        // Fade in the ending music
+        Audio.MusicSource.clip = Audio.EndingMusicClip;
+        Audio.MusicSource.Play();
+        Audio.MusicSource.DOFade(1f, FadeTime);
 
         // Fade out the panel
         FadingPanel.FadeOut(FadeTime);

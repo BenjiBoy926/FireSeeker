@@ -1256,10 +1256,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b668129fb834214385159dde0a019de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSource: {fileID: 958493489}
-  startingMusicClip: {fileID: 0}
-  musicFadeTime: 1
-  torchStaggerTime: 0.5
+  <MusicSource>k__BackingField: {fileID: 958493489}
+  <StartingMusicClip>k__BackingField: {fileID: 8300000, guid: aaa0035a53674cf4c98e8eb07b950c30, type: 3}
+  <EndingMusicClip>k__BackingField: {fileID: 8300000, guid: 4111b72ba979d774494cc3a088faeafd, type: 3}
+  <MusicFadeTime>k__BackingField: 1
+  <TorchStaggerTime>k__BackingField: 0.4
 --- !u!114 &958493488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1272,6 +1273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59320dec36ca11f4b809bfb082810596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Audio>k__BackingField: {fileID: 958493487}
   <FirstRespawnPoint>k__BackingField: {fileID: 1441544800}
   <FinalRespawnPoint>k__BackingField: {fileID: 267160916}
   <Skybox>k__BackingField: {fileID: 2100000, guid: bdfc475e919710248bf14d75643fefd2, type: 2}
@@ -1287,15 +1289,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5133520011512078235, guid: ccdaa06bc746073459c16320cf54dcfd, type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: aaa0035a53674cf4c98e8eb07b950c30, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -2833,7 +2835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1664210005548732477, guid: 8ff49dcf00a8eb5438af577d3ce3a780, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -64
       objectReference: {fileID: 0}
     - target: {fileID: 1664210005548732477, guid: 8ff49dcf00a8eb5438af577d3ce3a780, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2841,7 +2843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1664210005548732477, guid: 8ff49dcf00a8eb5438af577d3ce3a780, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1664210005548732477, guid: 8ff49dcf00a8eb5438af577d3ce3a780, type: 3}
       propertyPath: m_LocalRotation.w

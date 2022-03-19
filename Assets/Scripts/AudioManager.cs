@@ -7,18 +7,18 @@ using DG.Tweening;
 public class AudioManager : MonoBehaviour
 {
     #region Private Fields
-    [SerializeField]
-    [Tooltip("Audio source that plays the music")]
-    private AudioSource musicSource;
-    [SerializeField]
-    [Tooltip("Audio clip to play for the music at the start of the game")]
-    private AudioClip startingMusicClip;
-    [SerializeField]
-    [Tooltip("Time it takes for the music to fade in")]
-    private float musicFadeTime = 1f;
-    [SerializeField]
-    [Tooltip("Time between the each torch audio starting up")]
-    private float torchStaggerTime = 0.1f;
+    [field: SerializeField]
+    [field: Tooltip("Audio source that plays the music")]
+    public AudioSource MusicSource { get; private set; }
+    [field: SerializeField]
+    [field: Tooltip("Audio clip to play at the end of the game")]
+    public AudioClip EndingMusicClip { get; private set; }
+    [field: SerializeField]
+    [field: Tooltip("Time it takes for the music to fade in")]
+    public float MusicFadeTime { get; private set; } = 1f;
+    [field: SerializeField]
+    [field: Tooltip("Time between the each torch audio starting up")]
+    public float TorchStaggerTime { get; private set; } = 0.1f;
     #endregion
 
     #region Monobehaviour Messages
@@ -26,12 +26,9 @@ public class AudioManager : MonoBehaviour
     {
         StaggerTorchAudio();
 
-        // Play music from the other audio manager
-        musicSource = AudioLibrary.AudioManager.PlayMusic(startingMusicClip, true);
-
         // Fade the source in
-        musicSource.volume = 0f;
-        musicSource.DOFade(1f, musicFadeTime);
+        MusicSource.volume = 0f;
+        MusicSource.DOFade(1f, MusicFadeTime);
     }
     #endregion
 
@@ -49,7 +46,7 @@ public class AudioManager : MonoBehaviour
         foreach (Torch torch in orderedTorches)
         {
             torch.StartupAudio(delay);
-            delay += torchStaggerTime;
+            delay += TorchStaggerTime;
         }
     }
     private float GetTorchDistance(Torch t)
