@@ -97,8 +97,13 @@ public class LightTransition : MonoBehaviour
         }
         // If the transition complete event has not been invoked yet,
         // then invoke the event
-        else if (!transitionCompleteEventInvoked)
+        else if (!transitionCompleteEventInvoked && timeOfEffectStart >= 0f)
         {
+            // Put the transition at the exact ending
+            Interpolator = 1f;
+            Animate();
+
+            // Invoke transition complete event
             transitionCompleteEventInvoked = true;
             TransitionCompleteEvent.Invoke();
 

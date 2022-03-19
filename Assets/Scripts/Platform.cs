@@ -25,6 +25,9 @@ public class Platform : MonoBehaviour
     [field: SerializeField]
     [field: Tooltip("Ease to use for the platform rasing")]
     public Ease RaiseAnimationEase { get; private set; } = Ease.InBack;
+    [field: SerializeField]
+    [field: Tooltip("Audio source to play a sound when the platform moves")]
+    public AudioSource MoveSound { get; private set; }
     #endregion
 
     #region Monobehaviour Messages
@@ -43,6 +46,9 @@ public class Platform : MonoBehaviour
             transform.DOKill();
             transform.DOMoveY(LoweredPosition, MoveTime).SetEase(LowerAnimationEase);
             Lowered = true;
+
+            // Play the moving sound
+            MoveSound.Play();
         }
     }
     public void Raise()
@@ -52,6 +58,9 @@ public class Platform : MonoBehaviour
             transform.DOKill();
             transform.DOMoveY(RaisedPosition, MoveTime).SetEase(RaiseAnimationEase);
             Lowered = false;
+
+            // Play the moving sound
+            MoveSound.Play();
         }
     }
     #endregion

@@ -17,6 +17,16 @@ public class CameraController : MonoBehaviour
     public float currentZoom = 5f;
     public float zoomClosest = 1f;
     public float zoomFarthest = 10f;
+
+    public bool controlsEnabled = true;
+    #endregion
+
+    #region Public Methods
+    public void LookAt(Vector3 worldPos)
+    {
+        Vector3 toPos = worldPos - camera.position;
+        cameraCenter.forward = toPos;
+    }
     #endregion
 
     #region Monobehaviour Messages
@@ -26,27 +36,30 @@ public class CameraController : MonoBehaviour
     }
     private void Update()
     {
-        // Use the mouse scroll wheel to change the zoom level
-        float deltaZoom = Input.GetAxis("Mouse ScrollWheel") * cameraZoomSensitivity * Time.deltaTime;
-        currentZoom = Mathf.Clamp(currentZoom - deltaZoom, zoomClosest, zoomFarthest);
+        if (controlsEnabled)
+        {
+            // Use the mouse scroll wheel to change the zoom level
+            float deltaZoom = Input.GetAxis("Mouse ScrollWheel") * cameraZoomSensitivity * Time.deltaTime;
+            currentZoom = Mathf.Clamp(currentZoom - deltaZoom, zoomClosest, zoomFarthest);
+
+            // Get the mouse movement delta
+            float verticalDelta = Input.GetAxis("Mouse Y") * cameraGrabSensitivity * Time.deltaTime * -1f;
+            float horizontalDelta = Input.GetAxis("Mouse X") * cameraGrabSensitivity * Time.deltaTime;
+
+            // Clamp the vertical rotation
+            float verticalRot = cameraCenter.eulerAngles.x + verticalDelta;
+            if (verticalRot > 180) verticalRot -= 360f;
+            verticalRot = Mathf.Clamp(verticalRot, -maximumVeritcalRotation, maximumVeritcalRotation);
+
+            // Set the horizontal rotation
+            float horizontalRot = cameraCenter.eulerAngles.y + horizontalDelta;
+
+            // Set the euler angles directly
+            cameraCenter.eulerAngles = new Vector3(verticalRot, horizontalRot, 0f);
+        }
 
         // Set position of center object and camera
         SetPosition();
-
-        // Get the mouse movement delta
-        float verticalDelta = Input.GetAxis("Mouse Y") * cameraGrabSensitivity * Time.deltaTime * -1f;
-        float horizontalDelta = Input.GetAxis("Mouse X") * cameraGrabSensitivity * Time.deltaTime;
-
-        // Clamp the vertical rotation
-        float verticalRot = cameraCenter.eulerAngles.x + verticalDelta;
-        if (verticalRot > 180) verticalRot -= 360f;
-        verticalRot = Mathf.Clamp(verticalRot, -maximumVeritcalRotation, maximumVeritcalRotation);
-
-        // Set the horizontal rotation
-        float horizontalRot = cameraCenter.eulerAngles.y + horizontalDelta;
-
-        // Set the euler angles directly
-        cameraCenter.eulerAngles = new Vector3(verticalRot, horizontalRot, 0f);
     }
     private void OnValidate()
     {

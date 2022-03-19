@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 using DG.Tweening;
 
 public class Respawner : MonoBehaviour
@@ -25,6 +26,9 @@ public class Respawner : MonoBehaviour
     [SerializeField]
     [Tooltip("Time to wait after revealing the decoy to send the body to the respawn point")]
     private float decoyRevealTime = 1f;
+    [SerializeField]
+    [Tooltip("Time after respawn finishes that the decoy stays in place before disabling")]
+    private float decoyConcealTime = 0.8f;
     [SerializeField]
     [Tooltip("Time it takes for the body to move to the respawn point")]
     private float moveTime = 2f;
@@ -58,15 +62,19 @@ public class Respawner : MonoBehaviour
     }
     private void Update()
     {
-        if (body.position.y < killDepth && respawnRoutine == null)
+        if (respawnRoutine == null && (body.position.y < killDepth || Input.GetKeyDown(KeyCode.Backspace)))
         {
-            if (currentPoint) respawnRoutine = StartCoroutine(RespawnRoutine());
-            else respawnRoutine = StartCoroutine(RestartRoutine());
+            HandleRespawn();
         }
     }
     #endregion
 
     #region Private Methods
+    private void HandleRespawn()
+    {
+        if (currentPoint) respawnRoutine = StartCoroutine(RespawnRoutine());
+        else respawnRoutine = StartCoroutine(RestartRoutine());
+    }
     private IEnumerator RespawnRoutine()
     {
         // Disable the body and enable the decoy
@@ -95,6 +103,15 @@ public class Respawner : MonoBehaviour
 
         // Enable body again and disable decoy
         body.gameObject.SetActive(true);
+
+        // Disable and re-enable the decoy to repeat the reveal effect
+        decoy.gameObject.SetActive(false);
+        decoy.gameObject.SetActive(true);
+
+        // Wait for the second reveal
+        yield return new WaitForSeconds(decoyConcealTime);
+
+        // Finall, disable the decoy
         decoy.gameObject.SetActive(false);
 
         // Remove the respawn routine
