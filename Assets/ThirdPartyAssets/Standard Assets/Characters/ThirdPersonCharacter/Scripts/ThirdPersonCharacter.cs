@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
@@ -7,6 +8,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	[RequireComponent(typeof(Animator))]
 	public class ThirdPersonCharacter : MonoBehaviour
 	{
+		public UnityEvent jumpEvent => m_JumpEvent;
+		public UnityEvent landedEvent => m_LandedEvent;
+
 		[SerializeField] float m_MovingTurnSpeed = 360;
 		[SerializeField] float m_StationaryTurnSpeed = 180;
 		[SerializeField] float m_JumpPower = 12f;
@@ -15,6 +19,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		[SerializeField] float m_MoveSpeedMultiplier = 1f;
 		[SerializeField] float m_AnimSpeedMultiplier = 1f;
 		[SerializeField] float m_GroundCheckDistance = 0.1f;
+		[SerializeField] UnityEvent m_JumpEvent;
+		[SerializeField] UnityEvent m_LandedEvent;
 
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
@@ -173,6 +179,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				m_IsGrounded = false;
 				m_Animator.applyRootMotion = false;
 				m_GroundCheckDistance = 0.1f;
+				m_JumpEvent.Invoke();
 			}
 		}
 
@@ -210,6 +217,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// it is also good to note that the transform position in the sample assets is at the base of the character
 			if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
 			{
+				// If we were not previously grounded it means that we just landed
+				if (!m_IsGrounded) m_LandedEvent.Invoke();
+
 				m_GroundNormal = hitInfo.normal;
 				m_IsGrounded = true;
 				m_Animator.applyRootMotion = true;
