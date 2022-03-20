@@ -13,14 +13,14 @@ public class ProjectileExplosion : MonoBehaviour
     private LayerMask explosionMask;
     [SerializeField]
     [Tooltip("Range of the explosion")]
-    private float explosionRange = 10f;
+    private float explosionRadius = 5f;
     #endregion
 
     #region Public Methods
     public void Explode(ProjectileShooter owner, Projectile projectile)
     {
         // Overlap all colliders in the range
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange, explosionMask, QueryTriggerInteraction.Collide);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius, explosionMask, QueryTriggerInteraction.Collide);
 
         foreach (Collider collider in colliders)
         {

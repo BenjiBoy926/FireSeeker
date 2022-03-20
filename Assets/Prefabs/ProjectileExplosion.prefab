@@ -112,7 +112,7 @@ MonoBehaviour:
   explosionMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  explosionRange: 10
+  explosionRadius: 10
 --- !u!114 &5635067024029951274
 MonoBehaviour:
   m_ObjectHideFlags: 0

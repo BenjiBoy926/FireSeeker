@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,15 +8,17 @@ using DG.Tweening;
 public class GameManager : MonoBehaviour
 {
     #region Public Properties
+    public RespawnPoint FirstRespawnPoint => respawnPoints.OrderBy(point => point.Order).First();
+    public RespawnPoint LastRespawnPoint => respawnPoints.OrderBy(point => point.Order).Last();
+    #endregion
+
+    #region Editor Properties
     [field: SerializeField]
     [field: Tooltip("Reference to the script that managers audio")]
     public AudioManager Audio { get; private set; }
     [field: SerializeField]
-    [field: Tooltip("Reference to the first respawn point that the player should look at")]
-    public RespawnPoint FirstRespawnPoint { get; private set; }
-    [field: SerializeField]
-    [field: Tooltip("Torch of the final respawn point that the player should hit")]
-    public RespawnPoint FinalRespawnPoint { get; private set; }
+    [field: Tooltip("Canvas with the final goodbye message for the player")]
+    public GameObject GoodbyeCanvas { get; private set; }
     [field: SerializeField]
     [field: Tooltip("Skybox to switch out when the player gets all respawn points lit up")]
     public Material Skybox { get; private set; }
@@ -29,15 +32,21 @@ public class GameManager : MonoBehaviour
 
     #region Private Fields
     private PlayerManager playerManager;
+    private RespawnPoint[] respawnPoints;
     private bool firstTimeLanding = true;
     #endregion
 
     #region Monobehaviour Messages
     private void Start()
     {
-        FinalRespawnPoint.Torch.LightUpEvent.AddListener(OnFinalRespawnPointHit);
-        Sun.enabled = false;
+        // Find player and respawn points
         playerManager = FindObjectOfType<PlayerManager>();
+        respawnPoints = FindObjectsOfType<RespawnPoint>();
+
+        // Listen for last respawn point lit up
+        GoodbyeCanvas.SetActive(false);
+        LastRespawnPoint.Torch.LightUpEvent.AddListener(OnFinalRespawnPointHit);
+        Sun.enabled = false;
 
         // Look at a point above the first respawn point
         playerManager.CameraController.LookAt(
@@ -68,7 +77,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator BrightEnvironmentChange()
     {
         // Wait until the torch transition is finished
-        yield return new WaitForSeconds(FinalRespawnPoint.Torch.Transition.Duration);
+        yield return new WaitForSeconds(LastRespawnPoint.Torch.Transition.Duration);
 
         // Have the audio manager switch tracks here
         Audio.MusicSource.DOFade(0f, FadeTime);
@@ -81,6 +90,7 @@ public class GameManager : MonoBehaviour
         RenderSettings.ambientMode = AmbientMode.Skybox;
         Sun.enabled = true;
         playerManager.ReverbFilter.enabled = false;
+        GoodbyeCanvas.SetActive(true);
 
         // Fade in the ending music
         Audio.MusicSource.clip = Audio.EndingMusicClip;

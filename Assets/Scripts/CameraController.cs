@@ -27,13 +27,14 @@ public class CameraController : MonoBehaviour
         Vector3 toPos = worldPos - camera.position;
         cameraCenter.forward = toPos;
     }
+    public void ControlCursor(bool control)
+    {
+        if (control) Cursor.lockState = CursorLockMode.Locked;
+        else Cursor.lockState = CursorLockMode.None;
+    }
     #endregion
 
     #region Monobehaviour Messages
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
     private void Update()
     {
         if (controlsEnabled)
@@ -58,6 +59,12 @@ public class CameraController : MonoBehaviour
             cameraCenter.eulerAngles = new Vector3(verticalRot, horizontalRot, 0f);
         }
 
+        // Unlock the cursor when escape is pressed
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ControlCursor(false);
+        }
+
         // Set position of center object and camera
         SetPosition();
     }
@@ -67,6 +74,10 @@ public class CameraController : MonoBehaviour
         {
             SetPosition();
         }
+    }
+    private void OnApplicationFocus(bool focus)
+    {
+        ControlCursor(focus);
     }
     #endregion
 

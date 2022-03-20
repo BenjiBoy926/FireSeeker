@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class Debugging : MonoBehaviour
 {
+    public void Log()
+    {
+        Debug.Log("Here is the log");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
