@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 2838904643491634194}
   - component: {fileID: 1594519267869439418}
   - component: {fileID: 3689683836080972284}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RespawnLantern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 5826712380462574085}
   - component: {fileID: 623307652204909567}
   - component: {fileID: 2599150958841780084}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LitUpAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4838805124286927385}
   - component: {fileID: 7452410909952049370}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SnuffedOutAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -693,9 +693,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5731229141766309534, guid: e12f622c83fd42641b5387d29fdb53d4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4265338650084452101, guid: e12f622c83fd42641b5387d29fdb53d4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 909ba812e840a4c4399dd2bf9ed67a3d, type: 2}
+    - target: {fileID: -2793727289926329592, guid: e12f622c83fd42641b5387d29fdb53d4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1006227491098686444, guid: e12f622c83fd42641b5387d29fdb53d4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e12f622c83fd42641b5387d29fdb53d4, type: 3}
       propertyPath: m_Name
       value: Lantern
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e12f622c83fd42641b5387d29fdb53d4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156093288285338821, guid: e12f622c83fd42641b5387d29fdb53d4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507767883509144192, guid: e12f622c83fd42641b5387d29fdb53d4, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e12f622c83fd42641b5387d29fdb53d4, type: 3}

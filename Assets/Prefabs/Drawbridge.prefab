@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3858711476627017505}
   - component: {fileID: 1017259365774426099}
   - component: {fileID: 2718221191914593048}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Drawbridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,9 +217,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0dd767e32d75a634e871cca12f1f46a2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cb3406ff92d34f43826287ab512ff57, type: 2}
     - target: {fileID: 919132149155446097, guid: 0dd767e32d75a634e871cca12f1f46a2, type: 3}
       propertyPath: m_Name
       value: Bridge
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0dd767e32d75a634e871cca12f1f46a2, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dd767e32d75a634e871cca12f1f46a2, type: 3}
